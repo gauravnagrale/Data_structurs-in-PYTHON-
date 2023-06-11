@@ -70,7 +70,39 @@ class CircularDoublyLinkedList:
                     self.head = None
                     self.tail = None
                 else:
-                    self.head
+                    self.head = self.head.next
+                    self.head.prev = self.tail
+                    self.tail.next = self.head
+            elif loc == 1:
+                if self.head == self.tail:
+                    self.head.next = None
+                    self.head.prev = None
+                    self.head = None
+                    self.tail = None
+                else:
+                    self.tail = self.tail.prev
+                    self.tail.next = self.head
+                    self.head.prev = self.tail
+            else:
+                temp = self.head
+                ind = 0
+                while ind < loc-1:
+                    temp = temp.next
+                    ind += 1
+                temp.next = temp.next.next
+                temp.next.prev = temp
+
+    def deleteAll(self):
+        temp = self.head
+        self.tail.next = None
+        while temp:
+            temp.prev = None
+            temp = temp.next
+        self.head = None
+        self.tail = None
+
+        print("The Linked-List is DELETED")
+
 
     def search_ele(self,ele):
         temp = self.head
@@ -99,9 +131,17 @@ CDLL.insert(11, 0)
 CDLL.insert(12, 1)
 CDLL.insert(13, 1)
 CDLL.insert(100, 2)
+CDLL.insert(113, 2)
+CDLL.insert(234, 2)
+CDLL.insert(900, 2)
 CDLL.print()
 print('printing the reverse CDoubly Linked List')
 CDLL.rev_traverse()
 print()
 CDLL.search_ele(100)
+CDLL.delete(3)
+CDLL.print()
 print('I am making changes to see if its get updated into the GitHun rep')
+print('DELETING the entire LINKED-list')
+CDLL.deleteAll()
+CDLL.print()
